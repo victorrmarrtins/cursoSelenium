@@ -19,6 +19,7 @@ public class TesteCampoTreinamento {
         WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+
         driver.findElement(By.id("elementosForm:nome")).sendKeys("Teste do text field");
         Assert.assertEquals("Teste do text field", driver.findElement(By.id("elementosForm:nome")).getAttribute("value"));
         driver.quit();
@@ -30,6 +31,7 @@ public class TesteCampoTreinamento {
         WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+
         driver.findElement(By.id("elementosForm:sugestoes")).sendKeys("Teste do text area");
         Assert.assertEquals("Teste do text area", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
         driver.quit();
@@ -41,6 +43,7 @@ public class TesteCampoTreinamento {
         WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+
         driver.findElement(By.id("elementosForm:sexo:0")).click();
         Assert.assertTrue(driver.findElement(By.id("elementosForm:sexo:0")).isSelected());
         driver.quit();
@@ -52,6 +55,7 @@ public class TesteCampoTreinamento {
         WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+
         driver.findElement(By.id("elementosForm:sexo:1")).click();
         Assert.assertTrue(driver.findElement(By.id("elementosForm:sexo:1")).isSelected());
         driver.quit();
@@ -63,6 +67,7 @@ public class TesteCampoTreinamento {
         WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+
         driver.findElement(By.id("elementosForm:comidaFavorita:3")).click();
         Assert.assertTrue(driver.findElement(By.id("elementosForm:comidaFavorita:3")).isSelected());
         driver.quit();
@@ -74,6 +79,7 @@ public class TesteCampoTreinamento {
         WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+
         WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
         Select combo = new Select(element);
         combo.selectByVisibleText("1o grau incompleto");
@@ -87,6 +93,7 @@ public class TesteCampoTreinamento {
         WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+
         WebElement element = driver.findElement(By.id("elementosForm:esportes"));
         Select combo = new Select(element);
         combo.selectByVisibleText("Futebol");
@@ -103,6 +110,7 @@ public class TesteCampoTreinamento {
         WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+
         WebElement botao = driver.findElement(By.id("buttonSimple"));
         botao.click();
         Assert.assertEquals("Obrigado!", botao.getAttribute("value"));
@@ -116,6 +124,7 @@ public class TesteCampoTreinamento {
         WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+
         driver.findElement(By.linkText("Voltar")).click();
         driver.quit();
     }
