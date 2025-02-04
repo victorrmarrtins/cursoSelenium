@@ -1,6 +1,8 @@
 package org.example;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -9,12 +11,23 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class TesteAlert {
 
-    @Test
-    public void selectAlertSimples(){
+    private WebDriver driver;
+
+    @Before
+    public void inicializa(){
         System.setProperty("webdriver.gecko.driver", "/gecko/driver/geckodriver.exe");
-        WebDriver driver = new FirefoxDriver();
+        driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+    }
+
+    @After
+    public void finaliza(){
+        driver.quit();
+    }
+
+    @Test
+    public void selectAlertSimples(){
         driver.findElement(By.id("alert")).click();
         Alert alert = driver.switchTo().alert();
         String texto = alert.getText();
@@ -25,11 +38,6 @@ public class TesteAlert {
 
     @Test
     public void selectConfirmAccept() {
-        System.setProperty("webdriver.gecko.driver", "/gecko/driver/geckodriver.exe");
-        WebDriver driver = new FirefoxDriver();
-        driver.manage().window().maximize();
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-
         driver.findElement(By.id("confirm")).click();
         Alert alert = driver.switchTo().alert();
         Assert.assertEquals("Confirm Simples", alert.getText());
@@ -40,11 +48,6 @@ public class TesteAlert {
 
     @Test
     public void selectConfirmDismiss() {
-        System.setProperty("webdriver.gecko.driver", "/gecko/driver/geckodriver.exe");
-        WebDriver driver = new FirefoxDriver();
-        driver.manage().window().maximize();
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-
         driver.findElement(By.id("confirm")).click();
         Alert alert = driver.switchTo().alert();
         Assert.assertEquals("Confirm Simples", alert.getText());
@@ -55,12 +58,6 @@ public class TesteAlert {
 
     @Test
     public void selectPrompt() {
-        System.setProperty("webdriver.gecko.driver", "/gecko/driver/geckodriver.exe");
-        WebDriver driver = new FirefoxDriver();
-        driver.manage().window().maximize();
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-
         driver.findElement(By.id("prompt")).click();
         Alert alert = driver.switchTo().alert();
         Assert.assertEquals("Digite um numero", alert.getText());
