@@ -1,6 +1,8 @@
 package org.example;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,14 +14,26 @@ import java.util.List;
 
 public class DesafioCadastro {
 
-    @Test
-    public void cadastro() {
+    private WebDriver driver;
+    private DSL dsl;
+
+    @Before
+    public void inicializa(){
         System.setProperty("webdriver.gecko.driver", "/gecko/driver/geckodriver.exe");
-        WebDriver driver = new FirefoxDriver();
+        driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+    }
 
+    @After
+    public void finaliza(){
+        driver.quit();
+    }
+
+    @Test
+    public void cadastro() {
         //Nome
+
         driver.findElement(By.id("elementosForm:nome")).sendKeys("Victor");
         Assert.assertEquals("Victor", driver.findElement(By.id("elementosForm:nome")).getAttribute("value"));
 
