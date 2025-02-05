@@ -7,11 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class TesteCampoTreinamento {
 
     private WebDriver driver;
+    private DSL dsl;
 
     @Before
     public void inicializa(){
@@ -65,6 +67,21 @@ public class TesteCampoTreinamento {
     }
 
     @Test
+    public  void selectComboMultiplo(){
+        dsl.selecionarCombo("elementosForm:esportes", "Natacao");
+        dsl.selecionarCombo("elementosForm:esportes", "Corrida");
+        dsl.selecionarCombo("elementosForm:esportes", "O que eh esporte?");
+
+        List<String> opcoesMarcadas = dsl.obterValoresCombo("elementosForm:esportes");
+        Assert.assertEquals(2, opcoesMarcadas.size());
+
+        dsl.deselecionarCombo("elementosForm:esportes", "Corrida");
+        opcoesMarcadas = dsl.obterValoresCombo("elementosForm:esportes");
+        Assert.assertEquals(2, opcoesMarcadas.size());
+        opcoesMarcadas.containsAll(Arrays.asList("Natacao", "O que eh esporte?"));
+    }
+
+   /* @Test
     public void selectComboMultiplo() {
         WebElement element = driver.findElement(By.id("elementosForm:esportes"));
         Select combo = new Select(element);
@@ -74,7 +91,7 @@ public class TesteCampoTreinamento {
         List<WebElement> allSelectecOptions = combo.getAllSelectedOptions();
         Assert.assertEquals(3, allSelectecOptions.size());
     }
-
+*/
     @Test
     public void interagirComBotao() {
         WebElement botao = driver.findElement(By.id("buttonSimple"));

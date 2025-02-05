@@ -6,6 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DSL {
 
     private WebDriver driver;
@@ -31,8 +34,12 @@ public class DSL {
         driver.findElement(By.id(id)).sendKeys(texto);
     }
 
+    public String obterTexto(By by){
+        return driver.findElement(by).getText();
+    }
+
     public String obterTexto(String id) {
-        return driver.findElement(By.id(id)).getText();
+        return obterTexto(By.id(id));
     }
 
     /************ Combo *************/
@@ -53,6 +60,40 @@ public class DSL {
         WebElement element = driver.findElement(By.id(id));
         Select combo = new Select(element);
         return combo.getFirstSelectedOption().getText();
+    }
+
+    public boolean verificarSeEstaSelecionado(String id){
+        return driver.findElement(By.id(id)).isSelected();
+    }
+
+    public List<String> obterValoresCombo(String id){
+        WebElement element = driver.findElement(By.id("elementosForm:esportes"));
+        Select combo = new Select(element);
+        List<WebElement> allSelectedOptions = combo.getAllSelectedOptions();
+        List<String> valores = new ArrayList<>();
+        for (WebElement opcao: allSelectedOptions){
+            valores.add(opcao.getText());
+        }
+        return valores;
+    }
+
+    public int obterQuantidadeOpcoesCombo(String id){
+        WebElement element = driver.findElement(By.id(id));
+        Select combo = new Select(element);
+        List<WebElement> options = combo.getOptions();
+        return options.size();
+    }
+
+    public boolean verificarOpcaoCombo(String id, String opcao) {
+        WebElement element = driver.findElement(By.id(id));
+        Select combo = new Select(element);
+        List<WebElement> options = combo.getOptions();
+        for (WebElement option : options) {
+            if (option.getText().equals(opcao)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /************ Alertas *************/
