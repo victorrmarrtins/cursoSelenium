@@ -1,4 +1,4 @@
-package org.example;
+package br.qa.projeto.test;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -9,21 +9,23 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import static br.qa.projeto.core.DriverFactory.getDriver;
+import static br.qa.projeto.core.DriverFactory.killDriver;
+
 public class TesteAlert {
 
     private WebDriver driver;
 
     @Before
     public void inicializa(){
-        System.setProperty("webdriver.gecko.driver", "/gecko/driver/geckodriver.exe");
-        driver = new FirefoxDriver();
-        driver.manage().window().maximize();
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        getDriver();
+        System.setProperty("webdriver.chrome.driver", "/gecko/driver/chromedriver.exe");
+        getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
     }
 
     @After
     public void finaliza(){
-        driver.quit();
+        killDriver();
     }
 
     @Test

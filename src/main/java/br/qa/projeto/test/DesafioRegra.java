@@ -1,5 +1,6 @@
-package org.example;
+package br.qa.projeto.test;
 
+import br.qa.projeto.core.DSL;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -7,24 +8,25 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import static br.qa.projeto.core.DriverFactory.getDriver;
+import static br.qa.projeto.core.DriverFactory.killDriver;
+
 public class DesafioRegra {
     //Voltar a esse desafio quando chegar no sincronismo, problema com o firefox se perdendo na hora de achar a chamada do alert
 
-    private WebDriver driver;
     private DSL dsl;
 
     @Before
     public void inicializa(){
-        System.setProperty("webdriver.gecko.driver", "/gecko/driver/geckodriver.exe");
-        driver = new FirefoxDriver();
-        driver.manage().window().maximize();
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-        dsl = new DSL(driver);
+        getDriver();
+        System.setProperty("webdriver.chrome.driver", "/gecko/driver/chromedriver.exe");
+        getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        dsl = new DSL();
     }
 
     @After
     public void finaliza(){
-        driver.quit();
+        killDriver();
     }
 
     @Test

@@ -1,14 +1,18 @@
-package org.example;
+package br.qa.projeto.test;
 
+import br.qa.projeto.core.DSL;
 import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TesteCampoTreinamento {
 
@@ -102,6 +106,28 @@ public class TesteCampoTreinamento {
     @Test
     @Ignore
     public void interagirComLink() {
+    }
+
+    @Test
+    public void deveInteragirComEsperaFixa() throws InterruptedException{
+        dsl.clicar("buttonDelay");
+        Thread.sleep(5000);
+        dsl.escrever("novoCampo", "Deu certo?");
+    }
+
+    @Test
+    public void deveUtilizarEsperaImplicita() throws InterruptedException{
+        dsl.clicar("buttonDelay");
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        dsl.escrever("novoCampo", "Deu certo?");
+    }
+
+    @Test
+    public void deveUtilizarEsperaExplicita() throws InterruptedException{
+        dsl.clicar("buttonDelay");
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("novoCampo")));
+        dsl.escrever("novoCampo", "Deu certo?");
     }
 
 
